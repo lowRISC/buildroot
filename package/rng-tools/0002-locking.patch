@@ -1,0 +1,22 @@
+Dont exit if file locking fails (!)
+
+--- a/util.c
++++ b/util.c
+@@ -53,7 +53,7 @@
+ 			 pid_fn, strerror(err));
+ 		return -err;
+ 	}
+-
++#ifdef MANDATORY_LOCKING
+ 	/* lock */
+ 	memset(&lock, 0, sizeof(lock));
+ 	lock.l_type = F_WRLCK;
+@@ -70,7 +70,7 @@
+ 		close(fd);
+ 		return -err;
+ 	}
+-
++#endif
+ 	/* write file data */
+ 	bytes = strlen(str);
+ 	s = str;
