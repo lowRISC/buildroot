@@ -221,13 +221,6 @@ config BR2_KERNEL_HEADERS_5_2
 	  Version 5.2.x of the Linux kernel headers are no longer
 	  maintained upstream and are now removed.
 
-config BR2_TARGET_RISCV_PK
-	bool "riscv-pk was removed"
-	select BR2_LEGACY
-	help
-	  The RISC-V Proxy Kernel (pk) and Berkley Boot Loader (BBL)
-	  have been replaced with OpenSBI.
-
 config BR2_PACKAGE_SQLITE_STAT3
 	bool "sqlite stat3 support was removed"
 	select BR2_LEGACY

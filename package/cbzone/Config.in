@@ -1,0 +1,6 @@
+config BR2_PACKAGE_CBZONE
+	bool "cbzone"
+	help
+	  Classic Battle Zone Game
+
+	  https://github.com/jrrk/cbzone
