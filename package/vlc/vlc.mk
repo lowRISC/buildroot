@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-VLC_VERSION = 3.0.3
+VLC_VERSION = 3.0.8
 VLC_SITE = https://get.videolan.org/vlc/$(VLC_VERSION)
 VLC_SOURCE = vlc-$(VLC_VERSION).tar.xz
 VLC_LICENSE = GPL-2.0+, LGPL-2.1+
@@ -17,7 +17,7 @@ VLC_INSTALL_STAGING = YES
 
 # gcc bug internal compiler error: in merge_overlapping_regs, at
 # regrename.c:304. This bug is fixed since gcc 6.
-ifeq ($(BR2_microblaze):$(BR2_TOOLCHAIN_GCC_AT_LEAST_6),y:)
+ifeq ($(BR2_microblaze)$(BR2_or1k):$(BR2_TOOLCHAIN_GCC_AT_LEAST_6),y:)
 VLC_CONF_ENV += CFLAGS="$(TARGET_CFLAGS) -O0"
 VLC_CONF_OPTS += --disable-optimizations
 endif

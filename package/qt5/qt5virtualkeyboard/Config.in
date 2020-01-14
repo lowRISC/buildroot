@@ -14,6 +14,8 @@ config BR2_PACKAGE_QT5VIRTUALKEYBOARD
 	  consists of a C++ backend supporting custom input methods as
 	  well as a UI frontend implemented in QML.
 
+	  https://doc.qt.io/qt-5/qtvirtualkeyboard-index.html
+
 if BR2_PACKAGE_QT5VIRTUALKEYBOARD
 
 config BR2_PACKAGE_QT5VIRTUALKEYBOARD_LANGUAGE_LAYOUTS
@@ -52,5 +54,11 @@ config BR2_PACKAGE_QT5VIRTUALKEYBOARD_HANDWRITING
 
 	  Lipi Toolkit (LipiTk) is an open source toolkit for online
 	  Handwriting Recognition.
+
+config BR2_PACKAGE_QT5VIRTUALKEYBOARD_ARROW_KEY_NAVIGATION
+	bool "Arrow key navigation"
+	help
+	  Allows controlling the keyboard using the arrow and return
+	  keys.
 
 endif

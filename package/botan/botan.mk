@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-BOTAN_VERSION = 2.7.0
-BOTAN_SOURCE = Botan-$(BOTAN_VERSION).tgz
+BOTAN_VERSION = 2.11.0
+BOTAN_SOURCE = Botan-$(BOTAN_VERSION).tar.xz
 BOTAN_SITE = http://botan.randombit.net/releases
 BOTAN_LICENSE = BSD-2-Clause
 BOTAN_LICENSE_FILES = license.txt
@@ -17,7 +17,15 @@ BOTAN_CONF_OPTS = \
 	--os=linux \
 	--cc=gcc \
 	--cc-bin="$(TARGET_CXX)" \
-	--prefix=/usr
+	--ldflags="$(BOTAN_LDFLAGS)" \
+	--prefix=/usr \
+	--without-documentation
+
+BOTAN_LDFLAGS = $(TARGET_LDFLAGS)
+
+ifeq ($(BR2_TOOLCHAIN_HAS_LIBATOMIC),y)
+BOTAN_LDFLAGS += -latomic
+endif
 
 ifeq ($(BR2_SHARED_LIBS),y)
 BOTAN_CONF_OPTS += \
@@ -38,6 +46,10 @@ ifeq ($(BR2_TOOLCHAIN_HAS_SSP),y)
 BOTAN_CONF_OPTS += --with-stack-protector
 else
 BOTAN_CONF_OPTS += --without-stack-protector
+endif
+
+ifeq ($(BR2_TOOLCHAIN_USES_UCLIBC),y)
+BOTAN_CONF_OPTS += --without-os-feature=getauxval
 endif
 
 ifeq ($(BR2_PACKAGE_BOOST),y)
@@ -70,10 +82,12 @@ BOTAN_DEPENDENCIES += zlib
 BOTAN_CONF_OPTS += --with-zlib
 endif
 
-ifeq ($(BR2_POWERPC_CPU_HAS_ALTIVEC),y)
-BOTAN_CONF_OPTS += --enable-altivec
-else
+ifeq ($(BR2_POWERPC_CPU_HAS_ALTIVEC),)
 BOTAN_CONF_OPTS += --disable-altivec
+endif
+
+ifeq ($(BR2_ARM_CPU_HAS_NEON),)
+BOTAN_CONF_OPTS += --disable-neon
 endif
 
 define BOTAN_CONFIGURE_CMDS
@@ -81,15 +95,15 @@ define BOTAN_CONFIGURE_CMDS
 endef
 
 define BOTAN_BUILD_CMDS
-	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) AR="$(TARGET_AR) crs"
+	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) AR="$(TARGET_AR)"
 endef
 
 define BOTAN_INSTALL_STAGING_CMDS
-	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR="$(STAGING_DIR)/usr" install
+	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR="$(STAGING_DIR)" install
 endef
 
 define BOTAN_INSTALL_TARGET_CMDS
-	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR="$(TARGET_DIR)/usr" install
+	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR="$(TARGET_DIR)" install
 endef
 
 $(eval $(generic-package))

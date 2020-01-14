@@ -4,10 +4,9 @@
 #
 ################################################################################
 
-LUVI_VERSION = v2.8.0
-LUVI_SITE = https://github.com/luvit/luvi.git
-LUVI_SITE_METHOD = git
-LUVI_GIT_SUBMODULES = YES
+LUVI_VERSION = 2.9.3
+LUVI_SOURCE = luvi-src-v$(LUVI_VERSION).tar.gz
+LUVI_SITE = https://github.com/luvit/luvi/releases/download/v$(LUVI_VERSION)
 LUVI_LICENSE = Apache-2.0
 LUVI_LICENSE_FILES = LICENSE.txt
 LUVI_DEPENDENCIES = libuv luajit luv host-luajit
