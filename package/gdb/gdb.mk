@@ -8,6 +8,13 @@ GDB_VERSION = $(call qstrip,$(BR2_GDB_VERSION))
 GDB_SITE = $(BR2_GNU_MIRROR)/gdb
 GDB_SOURCE = gdb-$(GDB_VERSION).tar.xz
 
+ifeq ($(BR2_riscv),y)
+GDB_VERSION=c3eb4078520dad8234ffd7fbf893ac0da23ad3c8
+GDB_SITE = $(call github,riscv,riscv-binutils-gdb,$(GDB_VERSION))/.
+GDB_SOURCE = gdb-$(GDB_VERSION).tar.gz
+GDB_FROM_GIT = y
+endif
+
 ifeq ($(BR2_arc),y)
 GDB_SITE = $(call github,foss-for-synopsys-dwc-arc-processors,binutils-gdb,$(GDB_VERSION))
 GDB_SOURCE = gdb-$(GDB_VERSION).tar.gz
