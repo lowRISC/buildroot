@@ -15,12 +15,19 @@ define HOST_OPENOCD_CONFIGURE_CMDS
 	(cd $(@D); \
 	git clone -b 0.76 https://github.com/msteveb/jimtcl; \
 	./bootstrap; \
-	./configure --oldincludedir=$(STAGING_DIR)/usr/include --includedir=$(HOST_DIR)/include --disable-werror \
+	./configure \
+		--oldincludedir=$(STAGING_DIR)/usr/include \
+		--includedir=$(HOST_DIR)/include \
+		--prefix=$(HOST_DIR) \
+		--disable-werror \
 	)
 endef
 
 define HOST_OPENOCD_BUILD_CMDS
-	(cd $(@D); make -j 4 -s)
+	(cd $(@D); \
+	make -j 4 -s LDFLAGS=$(HOST_LDFLAGS); \
+	make install \
+	)
 endef
 
 # Rely on the Config.in options of each individual adapter selecting

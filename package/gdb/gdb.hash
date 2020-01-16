@@ -8,3 +8,6 @@ sha512  a2b83e949638fa27d3d2b971e3a77902050191d517c5b9ca1273d182b8c3b9da2c993a0d
 
 # Locally calculated (fetched from https://github.com/c-sky/binutils-gdb)
 sha512  c421e1f3c0d6cfb3c04544573c0c4b0075c8d8e3d563c6c234fcc1e4c2167ab203d1e57aec3b58abd348dc46f8cf9b47b753d3a43dba3ea970c9c9a6bd78c07b	gdb-4ecb98fbc2f94dbe01b69384afbc515107de73df.tar.gz
+
+# riscv version
+sha512 5b9bfe9a3c0931ce2f41492e59dbc29c5e957624efc27594d0e99a294fd7f776c00070e14c2ec33c06bddf4fbd417c975816a7b46dd5bb804b1769dc37ebc5cc         gdb-c3eb4078520dad8234ffd7fbf893ac0da23ad3c8.tar.gz

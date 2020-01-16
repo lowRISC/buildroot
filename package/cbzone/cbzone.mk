@@ -25,4 +25,6 @@ define CBZONE_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/cbzone.{help,motd} $(TARGET_DIR)/var/tmp
 endef
 
+CBZONE_DEPENDENCIES = xlib_libXt
+
 $(eval $(generic-package))

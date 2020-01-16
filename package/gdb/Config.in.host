@@ -5,7 +5,6 @@ config BR2_PACKAGE_HOST_GDB_ARCH_SUPPORTS
 	depends on !BR2_microblaze
 	depends on !BR2_nios2
 	depends on !BR2_or1k
-	depends on !BR2_riscv
 	depends on !BR2_nds32
 
 comment "Host GDB Options"
@@ -47,6 +46,7 @@ choice
 	prompt "GDB debugger Version"
 	default BR2_GDB_VERSION_8_2
 	depends on !BR2_arc
+	depends on !BR2_riscv
 	depends on !BR2_csky
 	help
 	  Select the version of gdb you wish to use.
