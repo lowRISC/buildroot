@@ -256,7 +256,7 @@ endif
 
 ifeq ($(BR2_PACKAGE_HOST_QEMU_LINUX_USER_MODE),y)
 HOST_QEMU_TARGETS += $(HOST_QEMU_ARCH)-linux-user
-HOST_QEMU_OPTS += --enable-linux-user
+HOST_QEMU_OPTS += --enable-linux-user --static
 
 HOST_QEMU_HOST_SYSTEM_TYPE = $(shell uname -s)
 ifneq ($(HOST_QEMU_HOST_SYSTEM_TYPE),Linux)
